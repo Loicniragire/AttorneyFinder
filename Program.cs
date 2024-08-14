@@ -8,38 +8,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.WebHost.UseUrls("http://*:80");
 builder.Services.AddControllers();  // Add controllers to the services
 
-/*
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.Authority = "https://securetoken.google.com/YOUR_PROJECT_ID";
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidIssuer = "https://securetoken.google.com/YOUR_PROJECT_ID",
-        ValidateAudience = true,
-        ValidAudience = "YOUR_PROJECT_ID",
-        ValidateLifetime = true
-    };
-})
-.AddFacebook(options =>
-{
-	options.AppId = builder.Configuration["Authentication:Facebook:AppId"];
-	options.AppSecret = builder.Configuration["Authentication:Facebook:AppSecret"];
-})
-.AddGoogle(options =>
-{
-    options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
-    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-});
-
-builder.Services.AddAuthorization();  // Add authorization services
-*/
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
