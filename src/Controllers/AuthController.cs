@@ -1,53 +1,24 @@
+
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-    [HttpGet("google-login")]
-    public IActionResult GoogleLogin()
+    private readonly IAuthService _authService;
+
+    public AuthController(IAuthService authService)
     {
-        var properties = new AuthenticationProperties { RedirectUri = Url.Action("GoogleResponse") };
-        return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        _authService = authService;
     }
 
-    [HttpGet("google-response")]
-    public async Task<IActionResult> GoogleResponse()
+    [HttpPost("login")]
+    public IActionResult Authenticate([FromBody] AuthenticateRequest model)
     {
-        var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
-        if (!result.Succeeded)
-            return BadRequest();
+        var response = _authService.Authenticate(model);
 
-        var claims = result.Principal.Identities
-            .FirstOrDefault()?.Claims.Select(claim => new
-            {
-                claim.Type,
-                claim.Value
-            });
+        if (response == null)
+            return BadRequest(new { message = "Username or password is incorrect" });
 
-        return Ok(claims);
-    }
-
-    [HttpGet("apple-login")]
-    public IActionResult AppleLogin()
-    {
-        var properties = new AuthenticationProperties { RedirectUri = Url.Action("AppleResponse") };
-        return Challenge(properties, "Apple");
-    }
-
-    [HttpGet("apple-response")]
-    public async Task<IActionResult> AppleResponse()
-    {
-        var result = await HttpContext.AuthenticateAsync("Apple");
-        if (!result.Succeeded)
-            return BadRequest();
-
-        var claims = result.Principal.Identities
-            .FirstOrDefault()?.Claims.Select(claim => new
-            {
-                claim.Type,
-                claim.Value
-            });
-
-        return Ok(claims);
+        return Ok(response);
     }
 }
 

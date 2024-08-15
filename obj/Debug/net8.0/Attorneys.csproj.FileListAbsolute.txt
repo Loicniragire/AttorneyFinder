@@ -140,3 +140,4 @@
 /Users/loicniragire/Workspace/Attorneys/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/loicniragire/Workspace/Attorneys/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/loicniragire/Workspace/Attorneys/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/loicniragire/Workspace/Attorneys/obj/Debug/net8.0/Attorneys.sourcelink.json

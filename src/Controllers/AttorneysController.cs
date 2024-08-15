@@ -1,4 +1,3 @@
-
 [ApiController]
 [Route("api/[controller]")]
 public class AttorneysController : ControllerBase
@@ -11,6 +10,7 @@ public class AttorneysController : ControllerBase
     }
 
     [HttpGet]
+	[Authorize(Roles = "Admin")]
     public async Task<ActionResult<IEnumerable<Attorney>>> GetAttorneys()
     {
         return await _context.Attorneys.ToListAsync();
