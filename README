@@ -13,3 +13,6 @@ docker ps -a
 
 ** Stop docker **
 docker compose down
+
+** Jwt Key generation **
+openssl rand -base64 32
