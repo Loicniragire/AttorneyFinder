@@ -2,8 +2,8 @@ public class AuthService : IAuthService
 {
     private readonly List<Attorney> _attorneys = new List<Attorney>
     {
-        new Attorney { Id = 1, Username = "test", Password = "test" }
-    };
+        new Attorney { Id = 1, Username = "test", Password = "test", Roles = new[] { "Admin" }
+    }};
 
     private readonly IConfiguration _configuration;
 
@@ -29,7 +29,11 @@ public class AuthService : IAuthService
         var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new[] { new Claim("id", attorney.Id.ToString()) }),
+            Subject = new ClaimsIdentity(new[]
+            {
+                new Claim("id", attorney.Id.ToString()),
+                new Claim(ClaimTypes.Role, string.Join(",", attorney.Roles))
+            }),
             Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:ExpiryMinutes"])),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
