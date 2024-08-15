@@ -1,15 +1,13 @@
 public class AuthService : IAuthService
 {
-    private readonly List<Attorney> _attorneys = new List<Attorney>
-    {
-        new Attorney { Id = 1, Username = "test", Password = "test", Roles = new[] { "Admin" }
-    }};
+    private readonly List<Attorney> _attorneys;
 
     private readonly IConfiguration _configuration;
 
     public AuthService(IConfiguration configuration)
     {
         _configuration = configuration;
+		_attorneys = configuration.GetSection("AttorneySettings:Attorneys").Get<List<Attorney>>();
     }
 
     public AuthenticateResponse Authenticate(AuthenticateRequest model)
