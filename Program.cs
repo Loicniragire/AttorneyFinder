@@ -35,6 +35,7 @@ builder.Services.AddAuthorization(options =>
 
 // Add services for dependency injection
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAttorneyDataProvider, AttorneyDataRepository>();
 
 builder.Services.AddControllers();  // Add controllers to the services
 
