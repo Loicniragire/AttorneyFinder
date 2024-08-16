@@ -26,7 +26,12 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+	options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+	options.AddPolicy("User", policy => policy.RequireRole("User"));
+	options.AddPolicy("Manager", policy => policy.RequireRole("Manager"));
+});
 
 // Add services for dependency injection
 builder.Services.AddScoped<IAuthService, AuthService>();

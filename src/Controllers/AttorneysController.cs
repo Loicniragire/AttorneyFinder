@@ -42,14 +42,30 @@ public class AttorneysController : ControllerBase
 
     [HttpPut("{id}")]
 	[Authorize(Roles = "Manager, Admin")]
+	[Route("api/attorneys/{id}")]
     public async Task<IActionResult> PutAttorney(int id, Attorney attorney)
     {
-        if (id != attorney.Id)
-        {
-            return BadRequest();
-        }
+		// find the attorney in the database
+		var dbAttorney = await _context.Attorneys.FindAsync(id);
+		if (dbAttorney == null)
+		{
+			return NotFound();
+		}
 
-        _context.Entry(attorney).State = EntityState.Modified;
+		// update the attorney
+		dbAttorney.Name = attorney?.Name ?? dbAttorney.Name;
+		dbAttorney.Email = attorney?.Email ?? dbAttorney.Email;
+		dbAttorney.Username = attorney?.Username ?? dbAttorney.Username;
+		dbAttorney.Password = attorney?.Password ?? dbAttorney.Password;
+		dbAttorney.Role = attorney?.Role ?? dbAttorney.Role;
+		dbAttorney.Phone = attorney?.Phone ?? dbAttorney.Phone;
+			
+		// set the updated at time
+		dbAttorney.UpdatedAt = DateTime.UtcNow;
+
+		// save the changes
+
+		_context.Entry(dbAttorney).State = EntityState.Modified;
 
         try
         {

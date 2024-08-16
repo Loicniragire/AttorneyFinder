@@ -19,12 +19,8 @@ public class Attorney
 	public string Password { get; set; }
 	public string Role { get; set; }
 	public string Phone { get; set; }
-	public string Token { get; set; }
-	public string RefreshToken { get; set; }
-	public DateTime? TokenExpires { get; set; }
-	public DateTime? RefreshTokenExpires { get; set; }
 	public bool IsDeleted { get; set; }
-	public DateTime CreatedAt { get; set; }
-	public DateTime UpdatedAt { get; set; }
+	public DateTimeOffset CreatedAt { get; set; }
+	public DateTimeOffset UpdatedAt { get; set; }
 }
 
