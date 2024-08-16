@@ -1,6 +1,4 @@
 
-version: '3.4'
-
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -20,6 +18,10 @@ services:
     environment:
       ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=attorneysdb;User=sa;Password=Your_password123;TrustServerCertificate=True"
       ASPNETCORE_ENVIRONMENT: Development
+      Jwt__Key: "ptVV6RdmjNiDGZBoV9NN0Km6FIockEtZVCzOnFP3wus="
+      Jwt__Issuer: "http://localhost:5000"
+      Jwt__Audience: "http://localhost:5000"
+      Jwt__ExpiryMinutes: 60
     ports:
       - "8080:80"
 

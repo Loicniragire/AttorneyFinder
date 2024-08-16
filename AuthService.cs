@@ -30,7 +30,7 @@ public class AuthService : IAuthService
             Subject = new ClaimsIdentity(new[]
             {
                 new Claim("id", attorney.Id.ToString()),
-                new Claim(ClaimTypes.Role, string.Join(",", attorney.Roles))
+                new Claim(ClaimTypes.Role, attorney.Role)
             }),
             Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:ExpiryMinutes"])),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

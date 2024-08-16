@@ -16,3 +16,13 @@ docker compose down
 
 ** Jwt Key generation **
 openssl rand -base64 32
+
+"ConnectionStrings": {
+		"DefaultConnection": "Server=localhost;Database=attorneysdb;User=sa;Password=Your_password123;TrustServerCertificate=True;Timeout=30;"
+	},
+"Jwt": {
+	"Key": "ptVV6RdmjNiDGZBoV9NN0Km6FIockEtZVCzOnFP3wus=",
+	"Issuer": "http://localhost:5000",
+	"Audience": "http://localhost:5000",
+	"ExpiryMinutes": 60
+},

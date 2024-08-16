@@ -10,7 +10,7 @@ public class AttorneysController : ControllerBase
     }
 
     [HttpGet]
-	[Authorize(Roles = "User, Manager, Admin")]
+	[Authorize(Roles = "Admin")]
     public async Task<ActionResult<IEnumerable<Attorney>>> GetAttorneys()
     {
         return await _context.Attorneys.ToListAsync();
