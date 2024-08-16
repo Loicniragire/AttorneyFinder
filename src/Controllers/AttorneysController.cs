@@ -10,13 +10,14 @@ public class AttorneysController : ControllerBase
     }
 
     [HttpGet]
-	[Authorize(Roles = "Admin")]
+	[Authorize(Roles = "User, Manager, Admin")]
     public async Task<ActionResult<IEnumerable<Attorney>>> GetAttorneys()
     {
         return await _context.Attorneys.ToListAsync();
     }
 
     [HttpGet("{id}")]
+	[Authorize(Roles = "User, Manager, Admin")]
     public async Task<ActionResult<Attorney>> GetAttorney(int id)
     {
         var attorney = await _context.Attorneys.FindAsync(id);
@@ -30,6 +31,7 @@ public class AttorneysController : ControllerBase
     }
 
     [HttpPost]
+	[Authorize(Roles = "Admin")]
     public async Task<ActionResult<Attorney>> PostAttorney(Attorney attorney)
     {
         _context.Attorneys.Add(attorney);
@@ -39,6 +41,7 @@ public class AttorneysController : ControllerBase
     }
 
     [HttpPut("{id}")]
+	[Authorize(Roles = "Manager, Admin")]
     public async Task<IActionResult> PutAttorney(int id, Attorney attorney)
     {
         if (id != attorney.Id)
@@ -68,6 +71,7 @@ public class AttorneysController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+	[Authorize(Roles = "Manager, Admin")]
     public async Task<IActionResult> DeleteAttorney(int id)
     {
         var attorney = await _context.Attorneys.FindAsync(id);
