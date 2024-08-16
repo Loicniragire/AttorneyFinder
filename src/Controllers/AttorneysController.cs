@@ -10,14 +10,16 @@ public class AttorneysController : ControllerBase
     }
 
     [HttpGet]
-	[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
+	[Route("api/attorneys")]
     public async Task<ActionResult<IEnumerable<Attorney>>> GetAttorneys()
     {
         return await _context.Attorneys.ToListAsync();
     }
 
     [HttpGet("{id}")]
-	[Authorize(Roles = "User, Manager, Admin")]
+    [Authorize(Roles = "User, Manager, Admin")]
+	[Route("api/attorneys/{id}")]
     public async Task<ActionResult<Attorney>> GetAttorney(int id)
     {
         var attorney = await _context.Attorneys.FindAsync(id);
@@ -31,7 +33,8 @@ public class AttorneysController : ControllerBase
     }
 
     [HttpPost]
-	[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
+	[Route("api/attorneys")]
     public async Task<ActionResult<Attorney>> PostAttorney(Attorney attorney)
     {
         _context.Attorneys.Add(attorney);
@@ -41,31 +44,16 @@ public class AttorneysController : ControllerBase
     }
 
     [HttpPut("{id}")]
-	[Authorize(Roles = "Manager, Admin")]
-	[Route("api/attorneys/{id}")]
+    [Authorize(Roles = "Manager, Admin")]
+    [Route("api/attorneys/{id}")]
     public async Task<IActionResult> PutAttorney(int id, Attorney attorney)
     {
-		// find the attorney in the database
-		var dbAttorney = await _context.Attorneys.FindAsync(id);
-		if (dbAttorney == null)
-		{
-			return NotFound();
-		}
+        if (id != attorney.Id)
+        {
+            return BadRequest();
+        }
 
-		// update the attorney
-		dbAttorney.Name = attorney?.Name ?? dbAttorney.Name;
-		dbAttorney.Email = attorney?.Email ?? dbAttorney.Email;
-		dbAttorney.Username = attorney?.Username ?? dbAttorney.Username;
-		dbAttorney.Password = attorney?.Password ?? dbAttorney.Password;
-		dbAttorney.Role = attorney?.Role ?? dbAttorney.Role;
-		dbAttorney.Phone = attorney?.Phone ?? dbAttorney.Phone;
-			
-		// set the updated at time
-		dbAttorney.UpdatedAt = DateTime.UtcNow;
-
-		// save the changes
-
-		_context.Entry(dbAttorney).State = EntityState.Modified;
+        _context.Entry(attorney).State = EntityState.Modified;
 
         try
         {
@@ -87,7 +75,8 @@ public class AttorneysController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-	[Authorize(Roles = "Manager, Admin")]
+    [Authorize(Roles = "Manager, Admin")]
+	[Route("api/attorneys/{id}")]
     public async Task<IActionResult> DeleteAttorney(int id)
     {
         var attorney = await _context.Attorneys.FindAsync(id);
