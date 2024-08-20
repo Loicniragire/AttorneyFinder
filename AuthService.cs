@@ -1,23 +1,29 @@
 public class AuthService : IAuthService
 {
-    private readonly List<Attorney> _attorneys;
+    private readonly List<Attorney> _defaultAttorneys;
+    private readonly IAttorneyDataProvider _attorneyDataProvider;
 
     private readonly IConfiguration _configuration;
 
-    public AuthService(IConfiguration configuration)
+    public AuthService(IConfiguration configuration, IAttorneyDataProvider attorneyDataProvider)
     {
         _configuration = configuration;
-		_attorneys = configuration.GetSection("AttorneySettings:Attorneys").Get<List<Attorney>>();
+        _defaultAttorneys = configuration.GetSection("AttorneySettings:Attorneys").Get<List<Attorney>>();
+        _attorneyDataProvider = attorneyDataProvider;
     }
 
-    public AuthenticateResponse Authenticate(AuthenticateRequest model)
+    public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest model)
     {
-        var attorney = _attorneys.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
+        var existingAttorneys = await _attorneyDataProvider.GetAttorneys();
+        IEnumerable<Attorney> attorneyCollection = (existingAttorneys.Any()) ? existingAttorneys : _defaultAttorneys;
+        var attorney = existingAttorneys.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
 
-        if (attorney == null) return null;
+        if (attorney == null) 
+		{
+			throw new MissingAttorneyException();
+		}
 
         var token = GenerateJwtToken(attorney);
-
         return new AuthenticateResponse { Token = token };
     }
 
@@ -38,5 +44,12 @@ public class AuthService : IAuthService
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
+}
+
+public class MissingAttorneyException : Exception
+{
+	public MissingAttorneyException() : base("Attorney not found")
+	{
+	}
 }
 

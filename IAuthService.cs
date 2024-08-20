@@ -1,6 +1,6 @@
 
 public interface IAuthService
 {
-    AuthenticateResponse Authenticate(AuthenticateRequest model);
+    Task<AuthenticateResponse> Authenticate(AuthenticateRequest model);
 }
 
