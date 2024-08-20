@@ -1,0 +1,30 @@
+<h2>Attorneys</h2>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let attorney of attorneys">
+        <td>{{ attorney.id }}</td>
+        <td>{{ attorney.name }} </td>
+        <td>{{ attorney.email }}</td>
+        <td>{{ attorney.role }}</td>
+        <td>{{ attorney.phone }}</td>
+        <td>
+          <a [routerLink]="['/attorney', attorney.id]" class="btn btn-info">View</a>
+          <a [routerLink]="['/edit-attorney', attorney.id]" class="btn btn-warning">Edit</a>
+          <button class="btn btn-danger" (click)="deleteAttorney(attorney.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<a routerLink="/add-attorney" class="btn btn-primary">Add Attorney</a>
