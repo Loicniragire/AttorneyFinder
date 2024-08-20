@@ -141,3 +141,9 @@
 /Users/loicniragire/Workspace/Attorneys/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/loicniragire/Workspace/Attorneys/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/loicniragire/Workspace/Attorneys/obj/Debug/net8.0/Attorneys.sourcelink.json
+/Users/loicniragire/Workspace/Attorneys/bin/Debug/net8.0/UI/AttorneyFinderApp/angular.json
+/Users/loicniragire/Workspace/Attorneys/bin/Debug/net8.0/UI/AttorneyFinderApp/package-lock.json
+/Users/loicniragire/Workspace/Attorneys/bin/Debug/net8.0/UI/AttorneyFinderApp/package.json
+/Users/loicniragire/Workspace/Attorneys/bin/Debug/net8.0/UI/AttorneyFinderApp/tsconfig.app.json
+/Users/loicniragire/Workspace/Attorneys/bin/Debug/net8.0/UI/AttorneyFinderApp/tsconfig.json
+/Users/loicniragire/Workspace/Attorneys/bin/Debug/net8.0/UI/AttorneyFinderApp/tsconfig.spec.json
