@@ -16,7 +16,7 @@ public class AuthService : IAuthService
     {
         var existingAttorneys = await _attorneyDataProvider.GetAttorneys();
         IEnumerable<Attorney> attorneyCollection = (existingAttorneys.Any()) ? existingAttorneys : _defaultAttorneys;
-        var attorney = existingAttorneys.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
+        var attorney = attorneyCollection.SingleOrDefault(x => x.Username == model.Username && x.Password == model.Password);
 
         if (attorney == null) 
 		{
