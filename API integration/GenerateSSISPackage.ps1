@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------------
-# Script Name: GenerateSSISPackageFromAPI.ps1
+# Script Name: GenerateSSISPackage.ps1
 # Description: This script automates the creation of an SSIS package that 
 #              retrieves a JWT access token from an authentication endpoint 
 #              and uses that token to fetch data from another API. The data 
