@@ -48,7 +48,7 @@ $package.Variables.Add("OutputFilePath", $false, $false, "C:\path\to\output\atto
 # This task makes an HTTP POST request to the authentication endpoint and retrieves the token
 
 $task1 = $package.Executables.Add("STOCK:ScriptTask")
-$task1Host = $task1 as [Microsoft.SqlServer.Dts.Runtime.TaskHost]
+$task1Host = [Microsoft.SqlServer.Dts.Runtime.TaskHost]$task1
 $task1Host.Name = "GetJwtToken"
 $task1Host.Properties["ScriptLanguage"].Value = "CSharp"
 
@@ -95,7 +95,7 @@ $task1Host.Properties["ScriptCode"].Value = $task1Code
 # This task makes an HTTP GET request to the data retrieval endpoint using the token and writes the response to a text file
 
 $task2 = $package.Executables.Add("STOCK:ScriptTask")
-$task2Host = $task2 as [Microsoft.SqlServer.Dts.Runtime.TaskHost]
+$task2Host = [Microsoft.SqlServer.Dts.Runtime.TaskHost]$task2
 $task2Host.Name = "GetDataAndWriteToFile"
 $task2Host.Properties["ScriptLanguage"].Value = "CSharp"
 
