@@ -12,7 +12,7 @@ services:
     image: attorney
     build:
       context: .
-      dockerfile: src/Dockerfile
+      dockerfile: src/Attorneys/Dockerfile
     depends_on:
       - sqlserver
     environment:
