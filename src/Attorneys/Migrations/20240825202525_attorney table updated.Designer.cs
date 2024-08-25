@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Attorneys.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240823183944_Init")]
-    partial class Init
+    [Migration("20240825202525_attorney table updated")]
+    partial class attorneytableupdated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,10 @@ namespace Attorneys.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("LawFirm")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -51,6 +55,10 @@ namespace Attorneys.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PracticeArea")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

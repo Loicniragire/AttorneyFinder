@@ -1,3 +1,4 @@
+namespace Attorneys.Interfaces;
 
 public interface IAuthService
 {
