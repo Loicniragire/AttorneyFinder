@@ -17,12 +17,8 @@ public class AuthServiceTests
 	{
 		_attorneyDataProviderMock = new Mock<IAttorneyDataProvider>();
 		_configurationMock = new Mock<IConfiguration>();
-
-		// Mocking the configuration for Jwt:Key and Jwt:ExpiryMinutes
-		// generate random key using openssl rand -base64 32 
         _configurationMock.Setup(x => x["Jwt:Key"]).Returns("2WSE7/HJQMqkjGre+5YU9xVKjFGUP7QHvfJ15QIGPRI=");
         _configurationMock.Setup(x => x["Jwt:ExpiryMinutes"]).Returns("60");
-
 		_userServiceMock = new Mock<IUserService>();
 	}
 
@@ -43,4 +39,15 @@ public class AuthServiceTests
 		Assert.That(response, Is.Not.Null);
 		Assert.That(response.Token, Is.Not.Null);
     }
+
+	[Test]
+	public async Task ShouldThrowMissingAttorneyExceptionWhenDefaultAttorneysAndDatabaseAreEmpty()
+	{
+		_userServiceMock.Setup(x => x.GetDefaultAttorneys()).Returns(new List<Attorney>());
+		_attorneyDataProviderMock.Setup(x => x.GetAttorneys()).ReturnsAsync(new List<Attorney>());
+
+		_authService = new AuthService(_userServiceMock.Object, _attorneyDataProviderMock.Object, _configurationMock.Object);
+		var request = new AuthenticateRequest { Username = "admin", Password = "admin" };
+		Assert.ThrowsAsync<MissingAttorneyException>(() => _authService.Authenticate(request));
+	}
 }
