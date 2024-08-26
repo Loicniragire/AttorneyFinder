@@ -11,6 +11,7 @@ public class TokenProviderService : ITokenProvider
 
     public string GenerateJwtToken(Attorney attorney)
     {
+		ValidateAttorney(attorney);
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
         var tokenDescriptor = new SecurityTokenDescriptor
@@ -26,6 +27,14 @@ public class TokenProviderService : ITokenProvider
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
+
+	private void ValidateAttorney(Attorney attorney)
+	{
+		if (attorney == null || string.IsNullOrEmpty(attorney.Role))
+		{
+			throw new ArgumentNullException(nameof(attorney));
+		}
+	}
 
 }
 

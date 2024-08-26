@@ -43,5 +43,12 @@ public class TokenProviderServiceTests
         Assert.That(roleClaim, Is.Not.Null);
         Assert.That(roleClaim.Value, Is.EqualTo("Admin"));
     }
+
+	[Test]
+	public void ShouldThrowArgumentNullExceptionWhenAttorneyRoleIsNullOrEmpty()
+	{
+		var tokenProviderService = new TokenProviderService(_configurationMock.Object);
+		Assert.Throws<ArgumentNullException>(() => tokenProviderService.GenerateJwtToken(null));
+	}
 }
 
