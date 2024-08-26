@@ -1,3 +1,4 @@
+namespace Attorneys.Models;
 
 public class AuthenticateResponse
 {

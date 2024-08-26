@@ -12,3 +12,5 @@ global using System.Security.Claims;
 global using System.Text;
 global using Attorneys.Interfaces;
 global using Attorneys.Services;
+global using Attorneys.Models;
+

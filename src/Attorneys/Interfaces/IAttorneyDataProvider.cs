@@ -1,3 +1,5 @@
+namespace Attorneys.Interfaces;
+
 public interface IAttorneyDataProvider
 {
 	Task<IEnumerable<Attorney>> GetAttorneys();
