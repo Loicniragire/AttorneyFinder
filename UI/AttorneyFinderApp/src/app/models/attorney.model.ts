@@ -4,6 +4,8 @@ export interface Attorney {
   email: string;
   username: string;
   password: string;
+  LawFirm: string;
+  PracticeArea: string;
   role: string;
   phone: string;
   isDeleted: boolean;

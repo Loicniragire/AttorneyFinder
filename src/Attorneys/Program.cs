@@ -38,6 +38,11 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAttorneyDataProvider, AttorneyDataRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddTransient<ITokenProvider, TokenProviderService>();
+builder.Services.AddLogging(b => 
+{
+	b.AddConsole();
+	b.AddDebug();
+});
 
 builder.Services.AddCors(options =>
 {

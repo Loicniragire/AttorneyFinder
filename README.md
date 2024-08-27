@@ -1,3 +1,17 @@
+# Attorney Finder
+
+This project is comprised of a set of backend Http APIs and an Angular frontend App. 
+
+## Attorneys API
+
+## AttorneyFinder APP
+
+## Database
+
+## Build
+
+## Execution
+
 ** Database migration **
 dotnet ef database migration add 'init'
 

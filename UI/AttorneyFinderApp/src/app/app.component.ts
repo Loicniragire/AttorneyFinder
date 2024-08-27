@@ -11,7 +11,7 @@ import { LoginComponent } from './components/login/login.component';
     LoginComponent
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']  // Fixed typo: `styleUrl` to `styleUrls`
+  styleUrls: ['./app.component.css'] 
 })
 export class AppComponent {
   title = 'AttorneyFinderApp';

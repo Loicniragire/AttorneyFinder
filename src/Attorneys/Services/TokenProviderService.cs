@@ -3,10 +3,12 @@ namespace Attorneys.Services;
 public class TokenProviderService : ITokenProvider
 {
     private readonly IConfiguration _configuration;
+	private readonly ILogger<TokenProviderService> _logger;
 
-    public TokenProviderService(IConfiguration configuration)
+    public TokenProviderService(IConfiguration configuration, ILogger<TokenProviderService> logger)
     {
         _configuration = configuration;
+		_logger = logger;
     }
 
     public string GenerateJwtToken(Attorney attorney)
@@ -24,6 +26,8 @@ public class TokenProviderService : ITokenProvider
             Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:ExpiryMinutes"])),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
+
+		_logger.LogInformation($"Generating token for attorney {attorney.Username}");
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
@@ -32,6 +36,7 @@ public class TokenProviderService : ITokenProvider
 	{
 		if (attorney == null || string.IsNullOrEmpty(attorney.Role))
 		{
+			_logger.LogError("Attorney is null or role is empty");
 			throw new ArgumentNullException(nameof(attorney));
 		}
 	}
