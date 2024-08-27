@@ -13,4 +13,6 @@ global using System.Text;
 global using Attorneys.Interfaces;
 global using Attorneys.Services;
 global using Attorneys.Models;
-
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Attorneys.Entities;
+global using Attorneys.EntityConfigurations;

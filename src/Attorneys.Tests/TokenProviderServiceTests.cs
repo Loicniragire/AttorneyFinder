@@ -1,9 +1,12 @@
+using Microsoft.Extensions.Logging;
+
 namespace Attorneys.Tests;
 
 [TestFixture]
 public class TokenProviderServiceTests
 {
 	private readonly Mock<IConfiguration> _configurationMock;
+	private readonly Mock<ILogger<TokenProviderService>> _loggerMock;
 	private const string _securityKey = "2WSE7/HJQMqkjGre+5YU9xVKjFGUP7QHvfJ15QIGPRI=";
 
 	public TokenProviderServiceTests()
@@ -11,12 +14,13 @@ public class TokenProviderServiceTests
 		_configurationMock = new Mock<IConfiguration>();
         _configurationMock.Setup(x => x["Jwt:Key"]).Returns(_securityKey);
         _configurationMock.Setup(x => x["Jwt:ExpiryMinutes"]).Returns("60");
+		_loggerMock = new Mock<ILogger<TokenProviderService>>();
 	}
 
     [Test]
-    public async Task ShouldGenerateJwtTokenWithClaims()
+    public void ShouldGenerateJwtTokenWithClaims()
     {
-		var tokenProviderService = new TokenProviderService(_configurationMock.Object);
+		var tokenProviderService = new TokenProviderService(_configurationMock.Object, _loggerMock.Object);
 		var attorney = new Attorney { Id = 1, Role = "Admin" };
 		var token = tokenProviderService.GenerateJwtToken(attorney);
 
@@ -47,7 +51,7 @@ public class TokenProviderServiceTests
 	[Test]
 	public void ShouldThrowArgumentNullExceptionWhenAttorneyRoleIsNullOrEmpty()
 	{
-		var tokenProviderService = new TokenProviderService(_configurationMock.Object);
+		var tokenProviderService = new TokenProviderService(_configurationMock.Object, _loggerMock.Object);
 		Assert.Throws<ArgumentNullException>(() => tokenProviderService.GenerateJwtToken(null));
 	}
 }
