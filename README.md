@@ -5,29 +5,14 @@ This project is comprised of a set of backend Http APIs and an Angular frontend 
 ## Attorneys API
 
 ## AttorneyFinder APP
+Command:
+### ng serve --open
+
+## Build & Execute
+command: docker compose up --build -d
 
 ## Database
-
-## Build
-
-## Execution
-
-** Database migration **
-dotnet ef database migration add 'init'
-
-** Database update **
-dotnet ef database update
-
-
-** Run the project **
-docker compose up --build -d
-
-** Check docker status **
-docker ps -a
-
-** Stop docker **
-docker compose down
-
-** Jwt Key generation **
-openssl rand -base64 32
+Commands:
+### dotnet ef database migration add <title>
+### dotnet ef database update
 

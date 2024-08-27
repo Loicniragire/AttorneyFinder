@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 
 @Component({
@@ -8,6 +8,8 @@ import { LoginComponent } from './components/login/login.component';
   imports: [
     RouterModule,
     RouterOutlet,
+	RouterLink,
+	RouterLinkActive,
     LoginComponent
   ],
   templateUrl: './app.component.html',

@@ -6,6 +6,6 @@ export const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'attorneys', component: AttorneyListComponent },
-  { path: '**', redirectTo: '/login' } // Wildcard route for a 404 page
+  { path: '**', redirectTo: '/login' }
 ];
 

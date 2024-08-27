@@ -4,13 +4,15 @@ import { AttorneyListComponent } from './components/attorney-list/attorney-list.
 import { AttorneyDetailComponent } from './components/attorney-detail/attorney-detail.component';
 import { AddAttorneyComponent } from './components/add-attorney/add-attorney.component';
 import { EditAttorneyComponent } from './components/edit-attorney/edit-attorney.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   { path: 'attorneys', component: AttorneyListComponent },
   { path: 'add-attorney', component: AddAttorneyComponent },
   { path: 'attorney/:id', component: AttorneyDetailComponent },
   { path: 'edit-attorney/:id', component: EditAttorneyComponent },
-  { path: '', redirectTo: 'attorneys', pathMatch: 'full' } // Default route
+  { path: '', redirectTo: 'login', pathMatch: 'full' } // Default route
 ];
 
 @NgModule({

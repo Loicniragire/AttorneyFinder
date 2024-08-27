@@ -18,6 +18,8 @@ export class AddAttorneyComponent {
     name: '',
     email: '',
     username: '',
+	LawFirm: '',
+	PracticeArea: '',
     password: '',
     role: '',
     phone: '',
