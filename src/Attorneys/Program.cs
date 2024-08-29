@@ -76,6 +76,8 @@ app.UseAuthentication();  // Add authentication middleware
 app.UseAuthorization();   // Add authorization middleware
 
 app.UseMiddleware<CachingMiddleware>();  // Add caching middleware
+app.UseMiddleware<LoggerMiddleware>();   // Add logging middleware
+app.UseMiddleware<RateLimitingMiddleware>();  // Add rate limiting middleware
 
 app.MapControllers();  // Map controller routes
 
