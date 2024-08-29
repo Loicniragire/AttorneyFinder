@@ -1,4 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<CacheSettings>(builder.Configuration.GetSection("CacheSettings"));
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -67,11 +68,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Attorneys API"));
 }
 
+// Middleware
 app.UseCors("AllowSpecificOrigin");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();  // Add authentication middleware
 app.UseAuthorization();   // Add authorization middleware
+
+app.UseMiddleware<CachingMiddleware>();  // Add caching middleware
 
 app.MapControllers();  // Map controller routes
 

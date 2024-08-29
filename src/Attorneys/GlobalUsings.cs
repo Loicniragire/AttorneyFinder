@@ -16,3 +16,5 @@ global using Attorneys.Models;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Attorneys.Entities;
 global using Attorneys.EntityConfigurations;
+global using Attorneys;
+global using Attorneys.Middlewares;
